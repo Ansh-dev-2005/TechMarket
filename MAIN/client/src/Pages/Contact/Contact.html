@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body ng-controller="ContactController as contactCtrl"
+
+    class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+    
+    <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold mb-4">Contact Us</h1>
+        <form ng-submit="contactCtrl.submitForm()" class="space-y-4">
+            <div>
+                <label for="name" class="block font-medium">Name</label>
+                <input type="text" id="name" ng-model="contactCtrl.name" class="border rounded px-3 py-2 w-full mt-1"
+                    required>
+            </div>
+            <div>
+                <label for="email" class="block font-medium">Email</label>
+                <input type="email" id="email" ng-model="contactCtrl.email" class="border rounded px-3 py-2 w-full mt-1"
+                    required>
+            </div>
+            <div>
+                <label for="phone" class="block font-medium">Phone</label>
+                <input type="tel" id="phone" ng-model="contactCtrl.phone" class="border rounded px-3 py-2 w-full mt-1"
+                    required>
+
+            </div>
+            <div>
+                <label for="message" class="block font-medium">Message</label>
+                <textarea id="message" ng-model="contactCtrl.message" rows="4"
+                    class="border rounded px-3 py-2 w-full mt-1" required></textarea>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('contactApp', [])
+            .controller('ContactController', function () {
+                var vm = this;
+                vm.name = '';
+                vm.email = '';
+                vm.message = '';
+                vm.phone = '';
+
+                vm.submitForm = function () {
+                    // You can implement form submission logic here
+                    // submit form data to the server at localhost:8000/contact/create
+                    const data = {
+                        name: vm.name,
+                        email: vm.email,
+                        phone: vm.phone,
+                        message: vm.message
+                    };
+
+                    fetch('http://localhost:8000/contact/create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+
+                    alert('Form submitted!');
+                    vm.name = '';
+                    vm.email = '';
+                    vm.phone = '';
+                    vm.message = '';
+
+                };
+            });
+    </script>
+</body>
+
+</html>

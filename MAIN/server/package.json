@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "marketplace"
+  ],
+  "author": "Ansh Garg",
+  "license": "ISC",
+  "dependencies": {
+    "@adminjs/express": "^6.1.0",
+    "@adminjs/mongoose": "^4.1.0",
+    "adminjs": "^7.8.1",
+    "body-parser": "^1.20.2",
+    "connect-pg-simple": "^9.0.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.2",
+    "mongoose-paginate-v2": "^1.8.0",
+    "nodemon": "^3.1.0",
+    "path": "^0.12.7",
+    "tslib": "^2.6.2"
+  },
+  "type": "module"
+}
